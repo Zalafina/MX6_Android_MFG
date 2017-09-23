@@ -1,0 +1,1 @@
+dd if=emmc_boot0.bin of=emmc.bin bs=1M oflag=append conv=notrunc

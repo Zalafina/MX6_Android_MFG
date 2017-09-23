@@ -1,0 +1,4 @@
+boot.img
+recovery.img
+system.img
+u-boot.bin
