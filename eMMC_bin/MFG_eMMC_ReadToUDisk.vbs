@@ -15,16 +15,22 @@ Function ConvertDateTime(tDateTime)
 End Function
 
 Function ReplaceRegEx(inputStr, patrn, replStr)
-Dim regEx
+Dim regEx,retStr
 Set regEx = New RegExp
 regEx.Pattern = patrn
 regEx.IgnoreCase = True
+regEx.MultiLine = False
+regEx.Global = True
 
 blfind = regEx.Test(inputStr)
 if blfind then
-    ReplaceRegEx = regEx.Replace(inputStr, replStr  & vbCr)
+    retStr = regEx.Replace(inputStr, replStr)
+    'retStr = Replace(retStr, replStr & vbCrLf, replStr & vbLf)
+    ReplaceRegEx = retStr
 else
-    ReplaceRegEx = inputStr & vbCrLf & replStr & vbCrLf
+    retStr = inputStr & vbNewLine & replStr & vbNewLine
+    'retStr = Replace(retStr, replStr & vbCrLf, replStr & vbLf)
+    ReplaceRegEx = retStr
 end if
 
 End Function
