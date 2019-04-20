@@ -22,20 +22,19 @@ regEx.IgnoreCase = True
 
 blfind = regEx.Test(inputStr)
 if blfind then
-    ReplaceRegEx = regEx.Replace(inputStr, replStr)
+    ReplaceRegEx = regEx.Replace(inputStr, replStr  & vbCr)
 else
-    ReplaceRegEx = inputStr & vbCrLf & replStr
+    ReplaceRegEx = inputStr & vbCrLf & replStr & vbCrLf
 end if
 
 End Function
 
 Set wshShell = CreateObject("WScript.shell")
 Currentdate=ConvertDateTime(Now)
-
 Dim Fso,TxtFl,Str
 Set Fso = CreateObject("Scripting.FileSystemObject")
 Set TxtFl = Fso.OpenTextFile ("..\cfg.ini",1)
-Str = ReplaceRegEx ( TxtFl.ReadAll,"emmc_date.+","emmc_date = "&Currentdate)
+Str = ReplaceRegEx ( TxtFl.ReadAll,"emmc_date.*","emmc_date = " & Currentdate)
 Set TxtFl = Fso.OpenTextFile ("..\cfg.ini",2)
 TxtFl.Write Str 
 TxtFl.Close
